@@ -1,0 +1,103 @@
+rateLimits:
+  description: >-
+    TrackingMore enforces per-account, per-endpoint rate limits on its V4 API.
+    Exceeding limits returns HTTP 429 (TooManyRequests) and requires a 120-second
+    wait before retrying. Legacy V2 and V3 APIs default to 1 request/second.
+    Enterprise plans can negotiate higher limits with support@trackingmore.com.
+
+  errorCode: 429
+  errorMessage: TooManyRequests
+  retryAfter: 120
+  retryAfterUnit: seconds
+
+  endpoints:
+    - path: /v4/trackings/create
+      method: POST
+      limit: 3
+      unit: requests/second
+      description: Create a new tracking entry. Lower limit due to write intensity.
+
+    - path: /v4/trackings/batch
+      method: POST
+      limit: 10
+      unit: requests/second
+      description: Batch create tracking entries.
+
+    - path: /v4/trackings/get
+      method: GET
+      limit: 10
+      unit: requests/second
+      description: Get tracking information for a shipment.
+
+    - path: /v4/trackings/update
+      method: PUT
+      limit: 10
+      unit: requests/second
+      description: Update tracking details.
+
+    - path: /v4/trackings/delete
+      method: DELETE
+      limit: 10
+      unit: requests/second
+      description: Delete a tracking entry.
+
+    - path: /v4/trackings/retrack
+      method: POST
+      limit: 10
+      unit: requests/second
+      description: Retrack a shipment.
+
+    - path: /v4/awb
+      method: POST
+      limit: 10
+      unit: requests/second
+      description: Air waybill (air cargo) tracking.
+
+    - path: /v4/couriers/all
+      method: GET
+      limit: 10
+      unit: requests/second
+      description: List all supported couriers.
+
+    - path: /v4/couriers/detect
+      method: POST
+      limit: 10
+      unit: requests/second
+      description: Auto-detect carrier from tracking number.
+
+  planVariations:
+    - plan: Free
+      apiAccess: false
+      note: No API access on Free plan; dashboard only.
+
+    - plan: Basic
+      apiAccess: false
+      note: No API access on Basic plan; dashboard and notifications only.
+
+    - plan: Pro
+      defaultLimit: 10
+      unit: requests/second
+      createLimit: 3
+      createUnit: requests/second
+      note: Standard V4 API limits apply. Approximately 2.59 million monthly requests at sustained 10 req/s.
+
+    - plan: Enterprise
+      defaultLimit: custom
+      note: Rate limits are negotiable. Contact support@trackingmore.com for higher allocations.
+
+  legacyApis:
+    - version: V2
+      defaultLimit: 1
+      unit: requests/second
+    - version: V3
+      defaultLimit: 1
+      unit: requests/second
+
+  listAllTrackings:
+    method: GET
+    limit: 1
+    unit: requests/second
+    maxResults: 2000
+    description: >-
+      The list all trackings endpoint has a stricter 1 request/second limit
+      and returns up to 2,000 tracking records per response.

@@ -1,0 +1,106 @@
+plans:
+  - name: Free
+    description: >-
+      Entry-level plan for small-volume users exploring shipment tracking.
+      Includes 50 shipments per month at no cost with access to the dashboard,
+      bulk import, auto carrier detection, customizable tracking page, and
+      ecommerce integrations.
+    price: 0.00
+    currency: USD
+    billingCycle: monthly
+    credits: 50
+    features:
+      - 1,300+ courier integrations
+      - Dashboard and bulk import
+      - Auto carrier detection
+      - 1 customizable tracking page
+      - eCommerce integrations (Shopify, WooCommerce, etc.)
+      - 24/7 live chat support
+      - 24/7 email support
+    limits:
+      shipments: 50
+      trackingPages: 1
+      apiAccess: false
+      webhooks: false
+
+  - name: Basic
+    description: >-
+      Designed for growing merchants who need bulk export, multiple tracking
+      pages, performance reports, and notification capabilities. Starts at
+      $11/month for 200 shipments with a $0.04 per-credit overage rate.
+    price: 11.00
+    currency: USD
+    billingCycle: monthly
+    credits: 200
+    overageRate: 0.04
+    overageCurrency: USD
+    annualDiscount: 20
+    features:
+      - All Free plan features
+      - Bulk export
+      - Up to 4 customizable tracking pages
+      - Performance reports
+      - Email and SMS notifications (SMS at additional cost)
+      - Multilingual tracking pages
+      - 24/7 live chat support
+      - 24/7 email support
+    limits:
+      shipments: 200
+      trackingPages: 4
+      apiAccess: false
+      webhooks: false
+
+  - name: Pro
+    description: >-
+      Most popular plan for businesses requiring direct API access and webhooks.
+      Priced at $74/month for 2,000 shipments. Includes tracking API, webhook
+      notifications, carrier auto-correction, translation features, and
+      branding removal. Rate limit is 10 requests/second for most endpoints.
+    price: 74.00
+    currency: USD
+    billingCycle: monthly
+    credits: 2000
+    overageRate: 0.04
+    overageCurrency: USD
+    annualDiscount: 20
+    features:
+      - All Basic plan features
+      - Tracking API access (base URL https://api.trackingmore.com/v4)
+      - Webhook notifications with HMAC-SHA256 verification
+      - Carrier auto-correction
+      - Translation features
+      - Branding removal
+      - Up to 10 customizable tracking pages
+      - Air cargo tracking (50 credits per MAWB)
+      - 24/7 live chat support
+      - 24/7 email support
+    limits:
+      shipments: 2000
+      trackingPages: 10
+      apiRateLimit: '10 req/s (most endpoints); 3 req/s (create tracking)'
+      webhooks: true
+      apiAccess: true
+
+  - name: Enterprise
+    description: >-
+      Custom plan for high-volume logistics platforms and enterprise clients.
+      Includes custom credit allocation, custom API rate limits, dedicated
+      account manager, and custom integration support. Contact sales for
+      pricing.
+    price: custom
+    currency: USD
+    billingCycle: monthly
+    credits: custom
+    features:
+      - All Pro plan features
+      - Custom integration support
+      - Custom API rate limits (negotiable above standard tiers)
+      - Dedicated account manager
+      - Up to 20 customizable tracking pages
+      - Priority support
+    limits:
+      shipments: custom
+      trackingPages: 20
+      apiRateLimit: custom
+      webhooks: true
+      apiAccess: true

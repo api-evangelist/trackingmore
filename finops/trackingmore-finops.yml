@@ -1,0 +1,98 @@
+finops:
+  description: >-
+    TrackingMore uses a credit-based consumption model tied to subscription
+    plans. Credits are deducted when unique tracking entries are created.
+    Subsequent reads, webhooks, and tracking page views do not consume credits.
+    Overage is billed at $0.04 per credit beyond plan allocation. SMS
+    notifications are billed separately based on destination country rates.
+
+  billingModel: subscription-plus-overage
+  creditCurrency: USD
+
+  creditConsumption:
+    - action: Create tracking (courier parcel)
+      credits: 1
+      description: >-
+        One credit deducted per unique combination of tracking number and
+        courier code created in the system. Applies on first creation only.
+
+    - action: Air cargo tracking (MAWB)
+      credits: 50
+      description: >-
+        Air waybill tracking consumes 50 credits per master air waybill number.
+        Available on Pro and Enterprise plans only.
+
+    - action: Translation of tracking details
+      credits: 1
+      description: >-
+        Translating tracking event details into another language costs one
+        additional credit. Translating location, state, and city is free.
+
+  freeActions:
+    - Retrieving tracking data via API after initial creation
+    - Retrieving tracking data via webhooks
+    - CSV exports of tracking data
+    - Tracking page views
+    - Email notifications
+    - Analytics and reporting
+    - Dashboard access
+
+  overage:
+    rate: 0.04
+    currency: USD
+    unit: per credit
+    billingCycle: monthly
+    description: >-
+      When usage exceeds the plan monthly credit allocation, overage charges
+      are calculated and billed on the next billing date along with the
+      following cycle's subscription fee.
+
+  smsNotifications:
+    billing: additional
+    description: >-
+      SMS notification fees vary by destination country and are calculated
+      based on usage from the previous billing cycle. See TrackingMore's
+      SMS pricing sheet for country-specific rates.
+    billingCycle: monthly
+
+  annualBilling:
+    discount: 20
+    description: >-
+      Annual billing is available on Basic and Pro plans with up to 20%
+      savings compared to monthly billing.
+
+  plans:
+    - name: Free
+      monthlyCost: 0.00
+      credits: 50
+      overageRate: null
+      note: No API access. No overage available; upgrade required at limit.
+
+    - name: Basic
+      monthlyCost: 11.00
+      credits: 200
+      overageRate: 0.04
+      annualDiscount: 20
+      note: Dashboard and notifications only. No API or webhook access.
+
+    - name: Pro
+      monthlyCost: 74.00
+      credits: 2000
+      overageRate: 0.04
+      annualDiscount: 20
+      pricePerTrackedOrder: 0.037
+      note: Includes API access, webhooks, and carrier auto-correction. 14-day free trial available.
+
+    - name: Enterprise
+      monthlyCost: custom
+      credits: custom
+      overageRate: custom
+      note: Custom pricing negotiated based on volume. Contact sales.
+
+  costOptimization:
+    - tip: Use the batch create endpoint (/v4/trackings/batch) to create multiple trackings in a single API call and reduce request overhead.
+    - tip: Credits are only consumed at tracking creation; polling the API for status updates is free and does not incur additional charges.
+    - tip: Annual billing on Basic or Pro plans saves up to 20% over monthly rates.
+    - tip: Air cargo (MAWB) tracking costs 50 credits per shipment; reserve Pro or Enterprise plan usage for high-value air freight.
+    - tip: Translation credits can be avoided by handling localization on the client side using raw tracking data returned by the API.
+    - tip: Monitor usage via the dashboard to avoid unexpected overage charges at the $0.04/credit rate.
