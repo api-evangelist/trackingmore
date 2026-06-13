@@ -1,0 +1,14 @@
+{
+  "code": 200,
+  "message": "Successful",
+  "data": [
+    {
+      "courier_code": "usps",
+      "courier_name": "USPS",
+      "courier_url": "https://www.usps.com/",
+      "phone": "1-800-275-8777",
+      "country": "US",
+      "type": "postal"
+    }
+  ]
+}

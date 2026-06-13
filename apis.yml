@@ -12,6 +12,8 @@ apis:
       - Ecommerce
     humanURL: https://www.trackingmore.com/docs/trackingmore/
     properties:
+      - url: openapi/trackingmore-openapi.yml
+        type: OpenAPI
       - url: https://www.trackingmore.com/docs/trackingmore/
         type: Documentation
       - url: https://www.trackingmore.com/docs/trackingmore/d5ac362fc3cda-api-quick-start-guide

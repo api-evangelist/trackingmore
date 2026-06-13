@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.trackingmore.com/v4/schemas/courier",
+  "title": "Courier",
+  "description": "A carrier/courier supported by TrackingMore",
+  "type": "object",
+  "properties": {
+    "courier_code": {
+      "type": "string",
+      "description": "Unique carrier code used in API requests",
+      "example": "usps"
+    },
+    "courier_name": {
+      "type": "string",
+      "description": "Human-readable carrier name",
+      "example": "USPS"
+    },
+    "courier_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Carrier official website URL"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Carrier customer service phone number"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country where the carrier primarily operates"
+    },
+    "type": {
+      "type": "string",
+      "description": "Carrier type (e.g., express, postal, freight, airline)"
+    }
+  },
+  "required": ["courier_code", "courier_name"]
+}

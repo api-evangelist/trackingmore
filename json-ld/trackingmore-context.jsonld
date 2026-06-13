@@ -1,0 +1,44 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "trackingmore": "https://www.trackingmore.com/docs/trackingmore/",
+    "schema": "https://schema.org/",
+
+    "Tracking": "schema:ParcelDelivery",
+    "tracking_number": "schema:trackingNumber",
+    "courier_code": "trackingmore:courierCode",
+    "order_id": "schema:orderNumber",
+    "title": "schema:name",
+    "customer_name": "schema:recipient",
+    "customer_email": "schema:email",
+    "note": "schema:description",
+    "status": "schema:deliveryStatus",
+    "origin_country": "schema:originAddress",
+    "destination_country": "schema:deliveryAddress",
+    "created_at": "schema:orderDate",
+    "updated_at": "schema:dateModified",
+    "last_event": "schema:description",
+    "last_update_time": "schema:dateModified",
+
+    "Courier": "schema:DeliveryMethod",
+    "courier_name": "schema:name",
+    "courier_url": "schema:url",
+    "phone": "schema:telephone",
+    "country": "schema:addressCountry",
+
+    "TrackingEvent": "schema:TrackAction",
+    "checkpoint_date": "schema:startTime",
+    "location": "schema:location",
+    "details": "schema:description",
+
+    "AirWaybill": "schema:ParcelDelivery",
+    "awb_number": "schema:trackingNumber",
+    "airline": "schema:provider",
+    "origin": "schema:departureAirport",
+    "destination": "schema:arrivalAirport",
+
+    "credit": "trackingmore:credit",
+    "webhook": "trackingmore:webhook",
+    "carrier_detection": "trackingmore:carrierDetection"
+  }
+}

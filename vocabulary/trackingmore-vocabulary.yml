@@ -1,0 +1,108 @@
+vocabulary:
+  - term: tracking_number
+    label: Tracking Number
+    description: >-
+      The unique identifier assigned by a carrier to a shipment. Used to
+      query current location and status from the carrier.
+    example: "9400111899223397576146"
+
+  - term: courier_code
+    label: Courier Code
+    description: >-
+      TrackingMore's internal short code identifying a specific carrier or
+      courier service. Used in all tracking API requests (e.g., "usps", "ups",
+      "fedex", "dhl", "china-post").
+    example: "usps"
+
+  - term: status
+    label: Tracking Status
+    description: >-
+      The overall delivery status of a tracked shipment. TrackingMore normalizes
+      statuses across all 1,300+ carriers into a standard set of values.
+    values:
+      - pending: Tracking created but no carrier data received yet
+      - inforeceived: Carrier has received shipment information
+      - transit: Shipment is in transit between locations
+      - pickup: Shipment is available for pickup at a facility
+      - delivered: Shipment has been delivered to the recipient
+      - undelivered: Delivery attempt was made but shipment was not delivered
+      - exception: An exception or issue has occurred with the shipment
+      - expired: No tracking update in an extended period
+      - notfound: Tracking number not found at the carrier
+
+  - term: substatus
+    label: Sub-Status
+    description: >-
+      A more granular status code that provides additional detail about the
+      current tracking status. Sub-statuses follow the pattern {status}_{code}
+      (e.g., "transit_arrival_at_facility", "exception_001").
+
+  - term: checkpoint
+    label: Tracking Checkpoint
+    description: >-
+      An individual tracking event recorded by the carrier at a specific
+      location and time. Checkpoints are collected in origin_info and
+      destination_info arrays.
+
+  - term: awb_number
+    label: Air Waybill Number
+    description: >-
+      Master Air Waybill (MAWB) number used to track air cargo shipments.
+      Format is XXX-XXXXXXXX where the first three digits are the airline
+      prefix code. Tracking air waybills consumes 50 credits per request.
+    example: "020-12345678"
+
+  - term: credit
+    label: Credit
+    description: >-
+      TrackingMore's unit of consumption. Most tracking operations consume
+      1 credit per unique tracking_number + courier_code combination.
+      Air waybill tracking consumes 50 credits per MAWB. Translation
+      consumes 1 additional credit.
+
+  - term: webhook
+    label: Webhook
+    description: >-
+      HTTP POST callback sent by TrackingMore to a user-configured URL
+      when a shipment status changes. Webhook payloads are signed using
+      HMAC-SHA256 for verification.
+
+  - term: origin_info
+    label: Origin Info
+    description: >-
+      Object containing tracking events recorded at or near the shipment's
+      origin location. Contains a trackinfo array of checkpoint events.
+
+  - term: destination_info
+    label: Destination Info
+    description: >-
+      Object containing tracking events recorded at or near the shipment's
+      destination location. Contains a trackinfo array of checkpoint events.
+
+  - term: carrier_detection
+    label: Carrier Detection
+    description: >-
+      TrackingMore's automated process of identifying which carrier(s) a
+      tracking number belongs to based on format patterns and heuristics.
+      Available via the POST /couriers/detect endpoint.
+
+  - term: rate_limit
+    label: Rate Limit
+    description: >-
+      TrackingMore enforces request rate limits per plan. Pro plan allows
+      10 requests/second for most endpoints and 3 requests/second for
+      tracking creation. Exceeding the limit returns HTTP 429 and requires
+      waiting 120 seconds before retrying.
+
+  - term: Tracking-Api-Key
+    label: API Key Header
+    description: >-
+      The HTTP request header used to authenticate API calls. Each
+      TrackingMore account supports up to 4 active API keys.
+
+  - term: batch_create
+    label: Batch Create
+    description: >-
+      Operation to create up to 40 shipment trackings in a single API call
+      via POST /trackings/batch. More efficient than individual creates for
+      bulk shipment imports.

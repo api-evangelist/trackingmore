@@ -1,0 +1,13 @@
+{
+  "tracking_number": "9400111899223397576146",
+  "courier_code": "usps",
+  "title": "Order #12345",
+  "customer_name": "Jane Smith",
+  "customer_email": "jane.smith@example.com",
+  "order_id": "12345",
+  "order_id_url": "https://mystore.com/orders/12345",
+  "note": "Priority customer",
+  "language": "en",
+  "destination_country": "US",
+  "origin_country": "CN"
+}
