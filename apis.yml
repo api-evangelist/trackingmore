@@ -27,19 +27,19 @@ apis:
       - url: https://www.trackingmore.com/webhook.html
         type: Webhooks
       - url: https://github.com/TrackingMore-API/trackingmore-sdk-python
-        type: SDK
+        type: SDKs
       - url: https://github.com/TrackingMore-API/trackingmore-sdk-nodejs
-        type: SDK
+        type: SDKs
       - url: https://github.com/TrackingMore-API/trackingmore-sdk-php
-        type: SDK
+        type: SDKs
       - url: https://github.com/TrackingMore-API/trackingmore-sdk-go
-        type: SDK
+        type: SDKs
       - url: https://github.com/TrackingMore-API/trackingmore-sdk-ruby
-        type: SDK
+        type: SDKs
       - url: https://github.com/TrackingMore-API/trackingmore-sdk-java
-        type: SDK
+        type: SDKs
       - url: https://github.com/TrackingMore-API/trackingmore-sdk-net
-        type: SDK
+        type: SDKs
       - url: plans/trackingmore-plans.yml
         type: Plans
       - url: rate-limits/trackingmore-rate-limits.yml
