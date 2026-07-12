@@ -89,6 +89,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/trackingmore-domain-security.yml
+  - type: Authentication
+    url: authentication/trackingmore-authentication.yml
   - type: Website
     url: https://www.trackingmore.com/
   - type: Documentation
@@ -138,3 +142,5 @@ common:
       - https://support.trackingmore.com/en/article/trackingmore-billing-explained-credits-and-sms-fees-hychoa/
       - https://www.trackingmore.com/tracking-api
     updated: '2026-06-13'
+  - url: https://www.trackingmore.com/blog/
+    type: Blog
