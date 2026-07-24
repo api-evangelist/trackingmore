@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: TrackingMore Air Waybills API
+  description: TrackingMore provides a unified multi-carrier shipment tracking REST API supporting 1,300+ carriers globally. The API enables real-time parcel tracking, webhook notifications for shipment status changes, automated carrier detection, delivery analytics, and branded tracking page customization. Designed for D2C merchants, logistics platforms, and ecommerce integrations across Shopify, Amazon, eBay, WooCommerce, and Magento.
+  version: v4
+  contact:
+    url: https://support.trackingmore.com/
+  termsOfService: https://www.trackingmore.com/terms-of-service.html
+  license:
+    name: Proprietary
+    url: https://www.trackingmore.com/terms-of-service.html
+servers:
+- url: https://api.trackingmore.com/v4
+  description: TrackingMore API v4 (production)
+security:
+- ApiKeyAuth: []
+tags:
+- name: Air Waybills
+  description: Track air cargo using Master Air Waybill (MAWB) numbers
+paths:
+  /awb:
+    post:
+      operationId: createAirWaybill
+      summary: Track air waybill
+      description: Track an air cargo shipment using a Master Air Waybill (MAWB) number in format XXX-XXXXXXXX. Each air waybill track consumes 50 credits.
+      tags:
+      - Air Waybills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AirWaybillRequest'
+            examples:
+              awb:
+                summary: Track an air waybill
+                value:
+                  awb_number: 020-12345678
+      responses:
+        '200':
+          description: Air waybill tracking result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirWaybillResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+components:
+  schemas:
+    AirWaybillResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/AirWaybill'
+    AirWaybillRequest:
+      type: object
+      required:
+      - awb_number
+      properties:
+        awb_number:
+          type: string
+          description: Master Air Waybill number in format XXX-XXXXXXXX or XXXXXXXXXXX
+          pattern: ^\d{3}[ -]?(\d{8})$
+          example: 020-12345678
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Response code (200 = success)
+        message:
+          type: string
+          description: Human-readable response message
+        data:
+          description: Response payload (varies by endpoint)
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        data:
+          type: array
+          items: {}
+          description: Empty array for error responses
+    AirWaybill:
+      type: object
+      properties:
+        awb_number:
+          type: string
+          description: Master Air Waybill number
+        airline:
+          type: string
+          description: Airline name
+        origin:
+          type: string
+          description: Origin airport IATA code
+        destination:
+          type: string
+          description: Destination airport IATA code
+        status:
+          type: string
+          description: Shipment status
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date-time
+              location:
+                type: string
+              description:
+                type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed - invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4001
+            message: Invalid API key.
+            data: []
+    RateLimitExceeded:
+      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4029
+            message: Too many requests.
+            data: []
+    BadRequest:
+      description: Bad request - missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4000
+            message: Bad Request
+            data: []
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Tracking-Api-Key
+      description: API key for authentication. Obtainable from your TrackingMore account dashboard. Up to 4 API keys per account.

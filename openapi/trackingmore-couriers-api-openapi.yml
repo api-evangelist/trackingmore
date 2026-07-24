@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: TrackingMore Air Waybills Couriers API
+  description: TrackingMore provides a unified multi-carrier shipment tracking REST API supporting 1,300+ carriers globally. The API enables real-time parcel tracking, webhook notifications for shipment status changes, automated carrier detection, delivery analytics, and branded tracking page customization. Designed for D2C merchants, logistics platforms, and ecommerce integrations across Shopify, Amazon, eBay, WooCommerce, and Magento.
+  version: v4
+  contact:
+    url: https://support.trackingmore.com/
+  termsOfService: https://www.trackingmore.com/terms-of-service.html
+  license:
+    name: Proprietary
+    url: https://www.trackingmore.com/terms-of-service.html
+servers:
+- url: https://api.trackingmore.com/v4
+  description: TrackingMore API v4 (production)
+security:
+- ApiKeyAuth: []
+tags:
+- name: Couriers
+  description: List available couriers and detect carrier from tracking number
+paths:
+  /couriers/all:
+    get:
+      operationId: getAllCouriers
+      summary: Get all couriers
+      description: Retrieve the full list of supported carriers/couriers available on the TrackingMore platform (1,300+ globally).
+      tags:
+      - Couriers
+      responses:
+        '200':
+          description: List of all supported couriers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourierListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /couriers/detect:
+    post:
+      operationId: detectCourier
+      summary: Detect courier
+      description: Automatically detect which carrier(s) a tracking number belongs to based on pattern matching and heuristics.
+      tags:
+      - Couriers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectCourierRequest'
+            examples:
+              detect:
+                summary: Detect courier for a tracking number
+                value:
+                  tracking_number: '9400111899223397576146'
+      responses:
+        '200':
+          description: Detected courier(s) for the tracking number
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectCourierResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+components:
+  schemas:
+    DetectCourierRequest:
+      type: object
+      required:
+      - tracking_number
+      properties:
+        tracking_number:
+          type: string
+          description: The tracking number to detect the carrier for
+          example: '9400111899223397576146'
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Response code (200 = success)
+        message:
+          type: string
+          description: Human-readable response message
+        data:
+          description: Response payload (varies by endpoint)
+    DetectCourierResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Courier'
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        data:
+          type: array
+          items: {}
+          description: Empty array for error responses
+    CourierListResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Courier'
+    Courier:
+      type: object
+      properties:
+        courier_code:
+          type: string
+          description: Unique carrier code used in API requests
+          example: usps
+        courier_name:
+          type: string
+          description: Human-readable carrier name
+          example: USPS
+        courier_url:
+          type: string
+          format: uri
+          description: Carrier website URL
+        phone:
+          type: string
+          description: Carrier customer service phone number
+        country:
+          type: string
+          description: Country where this carrier primarily operates
+        type:
+          type: string
+          description: Carrier type (e.g., express, postal, freight)
+  responses:
+    RateLimitExceeded:
+      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4029
+            message: Too many requests.
+            data: []
+    Unauthorized:
+      description: Authentication failed - invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4001
+            message: Invalid API key.
+            data: []
+    BadRequest:
+      description: Bad request - missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4000
+            message: Bad Request
+            data: []
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Tracking-Api-Key
+      description: API key for authentication. Obtainable from your TrackingMore account dashboard. Up to 4 API keys per account.
