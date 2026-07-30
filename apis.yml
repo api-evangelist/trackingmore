@@ -1,59 +1,129 @@
 aid: trackingmore
 url: https://raw.githubusercontent.com/api-evangelist/trackingmore/refs/heads/main/apis.yml
 apis:
-  - aid: trackingmore:trackingmore-api
-    name: TrackingMore API
-    tags:
-      - Logistics
-      - Shipping
-      - Tracking
-      - Parcels
-      - Webhooks
-      - Ecommerce
-    humanURL: https://www.trackingmore.com/docs/trackingmore/
-    properties:
-      - url: openapi/trackingmore-openapi.yml
-        type: OpenAPI
-      - url: https://www.trackingmore.com/docs/trackingmore/
-        type: Documentation
-      - url: https://www.trackingmore.com/docs/trackingmore/d5ac362fc3cda-api-quick-start-guide
-        type: GettingStarted
-      - url: https://www.trackingmore.com/docs/trackingmore/zte58cee4mz0v-api-authentication
-        type: Authentication
-      - url: https://www.trackingmore.com/docs/trackingmore/ft5s8mr1pyymy-rate-limit
-        type: RateLimits
-      - url: https://www.trackingmore.com/pricing
-        type: Pricing
-      - url: https://www.trackingmore.com/webhook.html
-        type: Webhooks
-      - url: https://github.com/TrackingMore-API/trackingmore-sdk-python
-        type: SDKs
-      - url: https://github.com/TrackingMore-API/trackingmore-sdk-nodejs
-        type: SDKs
-      - url: https://github.com/TrackingMore-API/trackingmore-sdk-php
-        type: SDKs
-      - url: https://github.com/TrackingMore-API/trackingmore-sdk-go
-        type: SDKs
-      - url: https://github.com/TrackingMore-API/trackingmore-sdk-ruby
-        type: SDKs
-      - url: https://github.com/TrackingMore-API/trackingmore-sdk-java
-        type: SDKs
-      - url: https://github.com/TrackingMore-API/trackingmore-sdk-net
-        type: SDKs
-      - url: plans/trackingmore-plans.yml
-        type: Plans
-      - url: rate-limits/trackingmore-rate-limits.yml
-        type: RateLimits
-      - url: finops/trackingmore-finops.yml
-        type: FinOps
-    description: >-
-      TrackingMore provides a unified multi-carrier shipment tracking REST API
-      supporting 1,300+ carriers globally. The API enables real-time parcel
-      tracking, webhook notifications for shipment status changes, automated
-      carrier detection, delivery analytics, and branded tracking page
-      customization. Designed for D2C merchants, logistics platforms, and
-      ecommerce integrations across Shopify, Amazon, eBay, WooCommerce, and
-      Magento.
+- aid: trackingmore:trackingmore-air-waybills-api
+  name: TrackingMore Air Waybills API
+  description: Track air cargo using Master Air Waybill (MAWB) numbers
+  humanURL: https://www.trackingmore.com/docs/trackingmore/
+  tags:
+  - Air Waybills
+  properties:
+  - type: OpenAPI
+    url: openapi/trackingmore-air-waybills-api-openapi.yml
+  - type: Documentation
+    url: https://www.trackingmore.com/docs/trackingmore/
+  - type: GettingStarted
+    url: https://www.trackingmore.com/docs/trackingmore/d5ac362fc3cda-api-quick-start-guide
+  - type: Authentication
+    url: https://www.trackingmore.com/docs/trackingmore/zte58cee4mz0v-api-authentication
+  - type: RateLimits
+    url: https://www.trackingmore.com/docs/trackingmore/ft5s8mr1pyymy-rate-limit
+  - type: Pricing
+    url: https://www.trackingmore.com/pricing
+  - type: Webhooks
+    url: https://www.trackingmore.com/webhook.html
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-python
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-nodejs
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-php
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-go
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-ruby
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-java
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-net
+  - type: Plans
+    url: plans/trackingmore-plans.yml
+  - type: RateLimits
+    url: rate-limits/trackingmore-rate-limits.yml
+  - type: FinOps
+    url: finops/trackingmore-finops.yml
+- aid: trackingmore:trackingmore-couriers-api
+  name: TrackingMore Couriers API
+  description: List available couriers and detect carrier from tracking number
+  humanURL: https://www.trackingmore.com/docs/trackingmore/
+  tags:
+  - Couriers
+  properties:
+  - type: OpenAPI
+    url: openapi/trackingmore-couriers-api-openapi.yml
+  - type: Documentation
+    url: https://www.trackingmore.com/docs/trackingmore/
+  - type: GettingStarted
+    url: https://www.trackingmore.com/docs/trackingmore/d5ac362fc3cda-api-quick-start-guide
+  - type: Authentication
+    url: https://www.trackingmore.com/docs/trackingmore/zte58cee4mz0v-api-authentication
+  - type: RateLimits
+    url: https://www.trackingmore.com/docs/trackingmore/ft5s8mr1pyymy-rate-limit
+  - type: Pricing
+    url: https://www.trackingmore.com/pricing
+  - type: Webhooks
+    url: https://www.trackingmore.com/webhook.html
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-python
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-nodejs
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-php
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-go
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-ruby
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-java
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-net
+  - type: Plans
+    url: plans/trackingmore-plans.yml
+  - type: RateLimits
+    url: rate-limits/trackingmore-rate-limits.yml
+  - type: FinOps
+    url: finops/trackingmore-finops.yml
+- aid: trackingmore:trackingmore-trackings-api
+  name: TrackingMore Trackings API
+  description: Create, retrieve, update, and delete shipment trackings
+  humanURL: https://www.trackingmore.com/docs/trackingmore/
+  tags:
+  - Trackings
+  properties:
+  - type: OpenAPI
+    url: openapi/trackingmore-trackings-api-openapi.yml
+  - type: Documentation
+    url: https://www.trackingmore.com/docs/trackingmore/
+  - type: GettingStarted
+    url: https://www.trackingmore.com/docs/trackingmore/d5ac362fc3cda-api-quick-start-guide
+  - type: Authentication
+    url: https://www.trackingmore.com/docs/trackingmore/zte58cee4mz0v-api-authentication
+  - type: RateLimits
+    url: https://www.trackingmore.com/docs/trackingmore/ft5s8mr1pyymy-rate-limit
+  - type: Pricing
+    url: https://www.trackingmore.com/pricing
+  - type: Webhooks
+    url: https://www.trackingmore.com/webhook.html
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-python
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-nodejs
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-php
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-go
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-ruby
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-java
+  - type: SDKs
+    url: https://github.com/TrackingMore-API/trackingmore-sdk-net
+  - type: Plans
+    url: plans/trackingmore-plans.yml
+  - type: RateLimits
+    url: rate-limits/trackingmore-rate-limits.yml
+  - type: FinOps
+    url: finops/trackingmore-finops.yml
 name: TrackingMore
 tags:
   - Logistics
@@ -63,7 +133,20 @@ tags:
   - Webhooks
   - Ecommerce
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/trackingmore.png
 access: 3rd-Party
 created: '2026-06-13'
 modified: '2026-06-13'
