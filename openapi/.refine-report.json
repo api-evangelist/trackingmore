@@ -1,0 +1,18 @@
+{
+  "provider": "trackingmore",
+  "sources": [
+    "trackingmore-air-waybills-api-openapi.yml",
+    "trackingmore-couriers-api-openapi.yml",
+    "trackingmore-trackings-api-openapi.yml"
+  ],
+  "outputs": [
+    "trackingmore-air-waybills-api-openapi.yml",
+    "trackingmore-couriers-api-openapi.yml",
+    "trackingmore-trackings-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
