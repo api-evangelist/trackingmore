@@ -1,0 +1,1792 @@
+{
+  "item": [
+    {
+      "id": "9502cc13-531e-496a-9ad2-8b98d3c8ef6b",
+      "name": "Trackings",
+      "description": {
+        "content": "Create, retrieve, update, and delete shipment trackings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4435a4ca-53b7-43f3-9429-938480a9a5c3",
+          "name": "Create a tracking",
+          "request": {
+            "name": "Create a tracking",
+            "description": {
+              "content": "Create a new shipment tracking. Requires a tracking number and courier code. Each unique tracking_number + courier_code pair consumes 1 credit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trackings",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tracking_number\": \"<string>\",\n  \"courier_code\": \"<string>\",\n  \"title\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"customer_email\": \"<email>\",\n  \"order_id\": \"<string>\",\n  \"order_id_url\": \"<uri>\",\n  \"note\": \"<string>\",\n  \"language\": \"<string>\",\n  \"destination_country\": \"<string>\",\n  \"origin_country\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8f5fddc-7243-4936-b8fa-6047921fdc9d",
+              "name": "Tracking created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tracking_number\": \"9400111899223397576146\",\n  \"courier_code\": \"usps\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6379,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"tracking_number\": \"string\",\n    \"courier_code\": \"string\",\n    \"order_id\": \"string\",\n    \"title\": \"string\",\n    \"customer_name\": \"string\",\n    \"customer_email\": \"string\",\n    \"note\": \"string\",\n    \"status\": \"pickup\",\n    \"substatus\": \"string\",\n    \"origin_country\": \"string\",\n    \"destination_country\": \"string\",\n    \"created_at\": \"1956-02-18T03:24:16.825Z\",\n    \"updated_at\": \"1995-02-26T01:12:45.667Z\",\n    \"last_event\": \"string\",\n    \"last_update_time\": \"1968-10-20T08:39:58.782Z\",\n    \"origin_info\": {\n      \"trackinfo\": [\n        {\n          \"checkpoint_date\": \"1996-05-14T21:03:56.405Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        },\n        {\n          \"checkpoint_date\": \"1965-01-31T02:17:29.397Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        }\n      ]\n    },\n    \"destination_info\": {\n      \"trackinfo\": [\n        {\n          \"checkpoint_date\": \"2017-05-01T21:07:50.204Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        },\n        {\n          \"checkpoint_date\": \"2025-04-08T08:55:16.423Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        }\n      ]\n    },\n    \"tracking\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4fa4774-da4d-4173-acd4-1d8a36fe4563",
+              "name": "Bad request - missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tracking_number\": \"9400111899223397576146\",\n  \"courier_code\": \"usps\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4000,\n  \"message\": \"Bad Request\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc735d03-c071-46f6-9f5a-724b3095d6d8",
+              "name": "Authentication failed - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tracking_number\": \"9400111899223397576146\",\n  \"courier_code\": \"usps\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4001,\n  \"message\": \"Invalid API key.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ef69711-dd14-46eb-a22f-11a5a8797521",
+              "name": "Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tracking_number\": \"9400111899223397576146\",\n  \"courier_code\": \"usps\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"Too many requests.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da7240d7-068d-4e7c-9650-aa9957f76d4a",
+          "name": "Batch create trackings",
+          "request": {
+            "name": "Batch create trackings",
+            "description": {
+              "content": "Create up to 40 shipment trackings in a single API call. Each item requires a tracking_number and courier_code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trackings",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"tracking_number\": \"<string>\",\n    \"courier_code\": \"<string>\",\n    \"title\": \"<string>\",\n    \"customer_name\": \"<string>\",\n    \"customer_email\": \"<email>\",\n    \"order_id\": \"<string>\",\n    \"order_id_url\": \"<uri>\",\n    \"note\": \"<string>\",\n    \"language\": \"<string>\",\n    \"destination_country\": \"<string>\",\n    \"origin_country\": \"<string>\"\n  },\n  {\n    \"tracking_number\": \"<string>\",\n    \"courier_code\": \"<string>\",\n    \"title\": \"<string>\",\n    \"customer_name\": \"<string>\",\n    \"customer_email\": \"<email>\",\n    \"order_id\": \"<string>\",\n    \"order_id_url\": \"<uri>\",\n    \"note\": \"<string>\",\n    \"language\": \"<string>\",\n    \"destination_country\": \"<string>\",\n    \"origin_country\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c1ec8c1-4dfa-4b83-b021-dc69ba2daf07",
+              "name": "Batch tracking creation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"tracking_number\": \"9400111899223397576146\",\n    \"courier_code\": \"usps\"\n  },\n  {\n    \"tracking_number\": \"1Z999AA10123456784\",\n    \"courier_code\": \"ups\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1932,\n  \"message\": \"string\",\n  \"data\": {\n    \"accepted\": [\n      {\n        \"id\": \"string\",\n        \"tracking_number\": \"string\",\n        \"courier_code\": \"string\",\n        \"order_id\": \"string\",\n        \"title\": \"string\",\n        \"customer_name\": \"string\",\n        \"customer_email\": \"string\",\n        \"note\": \"string\",\n        \"status\": \"notfound\",\n        \"substatus\": \"string\",\n        \"origin_country\": \"string\",\n        \"destination_country\": \"string\",\n        \"created_at\": \"2007-12-19T22:19:17.105Z\",\n        \"updated_at\": \"1956-10-26T23:29:57.382Z\",\n        \"last_event\": \"string\",\n        \"last_update_time\": \"1952-09-26T22:32:53.760Z\",\n        \"origin_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"destination_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"tracking\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"tracking_number\": \"string\",\n        \"courier_code\": \"string\",\n        \"order_id\": \"string\",\n        \"title\": \"string\",\n        \"customer_name\": \"string\",\n        \"customer_email\": \"string\",\n        \"note\": \"string\",\n        \"status\": \"undelivered\",\n        \"substatus\": \"string\",\n        \"origin_country\": \"string\",\n        \"destination_country\": \"string\",\n        \"created_at\": \"1969-07-03T01:42:02.364Z\",\n        \"updated_at\": \"1970-06-21T22:35:13.734Z\",\n        \"last_event\": \"string\",\n        \"last_update_time\": \"1977-05-30T03:24:51.325Z\",\n        \"origin_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"destination_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"tracking\": {}\n      }\n    ],\n    \"rejected\": [\n      {\n        \"tracking_number\": \"string\",\n        \"courier_code\": \"string\",\n        \"error\": \"string\"\n      },\n      {\n        \"tracking_number\": \"string\",\n        \"courier_code\": \"string\",\n        \"error\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13763178-69a2-4381-a123-4d5b9c87cb86",
+              "name": "Bad request - missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"tracking_number\": \"9400111899223397576146\",\n    \"courier_code\": \"usps\"\n  },\n  {\n    \"tracking_number\": \"1Z999AA10123456784\",\n    \"courier_code\": \"ups\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4000,\n  \"message\": \"Bad Request\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77bc036b-4839-4fe5-964c-99ac0823a153",
+              "name": "Authentication failed - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"tracking_number\": \"9400111899223397576146\",\n    \"courier_code\": \"usps\"\n  },\n  {\n    \"tracking_number\": \"1Z999AA10123456784\",\n    \"courier_code\": \"ups\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4001,\n  \"message\": \"Invalid API key.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc2db097-8d03-4dab-a8c4-620407f16b27",
+              "name": "Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"tracking_number\": \"9400111899223397576146\",\n    \"courier_code\": \"usps\"\n  },\n  {\n    \"tracking_number\": \"1Z999AA10123456784\",\n    \"courier_code\": \"ups\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"Too many requests.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "888cec16-eac4-4030-aecd-63c7c00ce239",
+          "name": "Get tracking results",
+          "request": {
+            "name": "Get tracking results",
+            "description": {
+              "content": "Retrieve tracking results for one or more shipments. Supports filtering by courier code, tracking status, date range, and other parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trackings",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tracking_number",
+                  "value": "<string>",
+                  "description": "Tracking number to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "courier_code",
+                  "value": "<string>",
+                  "description": "Carrier/courier code to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Shipment status to filter by (e.g., pending, transit, delivered, exception)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_min",
+                  "value": "<string>",
+                  "description": "Filter by minimum creation date (Unix timestamp or ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_max",
+                  "value": "<string>",
+                  "description": "Filter by maximum creation date (Unix timestamp or ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at_min",
+                  "value": "<string>",
+                  "description": "Filter by minimum last updated date (Unix timestamp or ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at_max",
+                  "value": "<string>",
+                  "description": "Filter by maximum last updated date (Unix timestamp or ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination (default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "40",
+                  "description": "Number of results per page (default 40, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "Language code for translated tracking messages"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "251b6b9d-cc09-41d0-ac2f-df5ddd1e9175",
+              "name": "List of tracking results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "courier_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "40"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 177,\n  \"message\": \"string\",\n  \"data\": {\n    \"total\": 7520,\n    \"trackings\": [\n      {\n        \"id\": \"string\",\n        \"tracking_number\": \"string\",\n        \"courier_code\": \"string\",\n        \"order_id\": \"string\",\n        \"title\": \"string\",\n        \"customer_name\": \"string\",\n        \"customer_email\": \"string\",\n        \"note\": \"string\",\n        \"status\": \"exception\",\n        \"substatus\": \"string\",\n        \"origin_country\": \"string\",\n        \"destination_country\": \"string\",\n        \"created_at\": \"1949-01-17T15:39:36.402Z\",\n        \"updated_at\": \"1964-01-29T03:40:39.056Z\",\n        \"last_event\": \"string\",\n        \"last_update_time\": \"1981-10-15T01:49:20.498Z\",\n        \"origin_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"destination_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"tracking\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"tracking_number\": \"string\",\n        \"courier_code\": \"string\",\n        \"order_id\": \"string\",\n        \"title\": \"string\",\n        \"customer_name\": \"string\",\n        \"customer_email\": \"string\",\n        \"note\": \"string\",\n        \"status\": \"inforeceived\",\n        \"substatus\": \"string\",\n        \"origin_country\": \"string\",\n        \"destination_country\": \"string\",\n        \"created_at\": \"2026-05-07T08:15:54.750Z\",\n        \"updated_at\": \"1974-02-23T03:50:07.770Z\",\n        \"last_event\": \"string\",\n        \"last_update_time\": \"2001-09-15T03:34:39.614Z\",\n        \"origin_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"destination_info\": {\n          \"trackinfo\": [\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"checkpoint_date\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"checkpoint_status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"substatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"details\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"tracking\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "960ec137-9cde-40a3-82c6-3362f57b1007",
+              "name": "Authentication failed - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "courier_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "40"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4001,\n  \"message\": \"Invalid API key.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca818254-b260-4f19-b56a-332b7e75dd78",
+              "name": "Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "courier_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_at_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "40"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"Too many requests.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8eda3f0-1955-4d65-93f7-ad87af541b1e",
+          "name": "Update a tracking",
+          "request": {
+            "name": "Update a tracking",
+            "description": {
+              "content": "Update metadata or custom fields for an existing tracking identified by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trackings",
+                "update",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique tracking identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"customer_email\": \"<email>\",\n  \"order_id\": \"<string>\",\n  \"note\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69838ad6-b272-4618-b81c-246121a1e1fe",
+              "name": "Tracking updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "update",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"customer_email\": \"<email>\",\n  \"order_id\": \"<string>\",\n  \"note\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6379,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"tracking_number\": \"string\",\n    \"courier_code\": \"string\",\n    \"order_id\": \"string\",\n    \"title\": \"string\",\n    \"customer_name\": \"string\",\n    \"customer_email\": \"string\",\n    \"note\": \"string\",\n    \"status\": \"pickup\",\n    \"substatus\": \"string\",\n    \"origin_country\": \"string\",\n    \"destination_country\": \"string\",\n    \"created_at\": \"1956-02-18T03:24:16.825Z\",\n    \"updated_at\": \"1995-02-26T01:12:45.667Z\",\n    \"last_event\": \"string\",\n    \"last_update_time\": \"1968-10-20T08:39:58.782Z\",\n    \"origin_info\": {\n      \"trackinfo\": [\n        {\n          \"checkpoint_date\": \"1996-05-14T21:03:56.405Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        },\n        {\n          \"checkpoint_date\": \"1965-01-31T02:17:29.397Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        }\n      ]\n    },\n    \"destination_info\": {\n      \"trackinfo\": [\n        {\n          \"checkpoint_date\": \"2017-05-01T21:07:50.204Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        },\n        {\n          \"checkpoint_date\": \"2025-04-08T08:55:16.423Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        }\n      ]\n    },\n    \"tracking\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c76f8a17-4069-4bda-93d8-ce875f4433f6",
+              "name": "Bad request - missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "update",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"customer_email\": \"<email>\",\n  \"order_id\": \"<string>\",\n  \"note\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4000,\n  \"message\": \"Bad Request\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5326aff5-acc5-4762-8619-5c6e89ecfd53",
+              "name": "Authentication failed - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "update",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"customer_email\": \"<email>\",\n  \"order_id\": \"<string>\",\n  \"note\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4001,\n  \"message\": \"Invalid API key.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "574f3baa-1d4a-4f4c-802c-99be27a06182",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "update",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"customer_email\": \"<email>\",\n  \"order_id\": \"<string>\",\n  \"note\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4004,\n  \"message\": \"Not found.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "900aad55-44f1-48c3-bdce-6c30c81113aa",
+              "name": "Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "update",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"customer_name\": \"<string>\",\n  \"customer_email\": \"<email>\",\n  \"order_id\": \"<string>\",\n  \"note\": \"<string>\",\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"Too many requests.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcb24456-1f07-486e-b6b6-9293e73a7594",
+          "name": "Delete a tracking",
+          "request": {
+            "name": "Delete a tracking",
+            "description": {
+              "content": "Permanently delete a shipment tracking by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trackings",
+                "delete",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique tracking identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d3c7c78-f938-4ac8-87dc-12d355dab953",
+              "name": "Tracking deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "delete",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 348,\n  \"message\": \"string\",\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb029172-082e-4257-b2cf-b8b4b55ebfeb",
+              "name": "Authentication failed - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "delete",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4001,\n  \"message\": \"Invalid API key.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d0eefb-7610-4c0d-97b0-51ff28feddd5",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "delete",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4004,\n  \"message\": \"Not found.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0cc8718-7c0c-460c-a8b2-615e86fc3759",
+              "name": "Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "delete",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"Too many requests.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b23041c-049b-4f5c-b95c-615d37865de6",
+          "name": "Retrack a tracking",
+          "request": {
+            "name": "Retrack a tracking",
+            "description": {
+              "content": "Request a fresh tracking update for a shipment that has stopped updating. Useful for expired or stale trackings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trackings",
+                "retrack",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique tracking identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a63789bd-738c-4ef8-af43-3b6a7b9f07ed",
+              "name": "Retrack request submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "retrack",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6379,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"tracking_number\": \"string\",\n    \"courier_code\": \"string\",\n    \"order_id\": \"string\",\n    \"title\": \"string\",\n    \"customer_name\": \"string\",\n    \"customer_email\": \"string\",\n    \"note\": \"string\",\n    \"status\": \"pickup\",\n    \"substatus\": \"string\",\n    \"origin_country\": \"string\",\n    \"destination_country\": \"string\",\n    \"created_at\": \"1956-02-18T03:24:16.825Z\",\n    \"updated_at\": \"1995-02-26T01:12:45.667Z\",\n    \"last_event\": \"string\",\n    \"last_update_time\": \"1968-10-20T08:39:58.782Z\",\n    \"origin_info\": {\n      \"trackinfo\": [\n        {\n          \"checkpoint_date\": \"1996-05-14T21:03:56.405Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        },\n        {\n          \"checkpoint_date\": \"1965-01-31T02:17:29.397Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        }\n      ]\n    },\n    \"destination_info\": {\n      \"trackinfo\": [\n        {\n          \"checkpoint_date\": \"2017-05-01T21:07:50.204Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        },\n        {\n          \"checkpoint_date\": \"2025-04-08T08:55:16.423Z\",\n          \"location\": \"string\",\n          \"checkpoint_status\": \"string\",\n          \"substatus\": \"string\",\n          \"details\": \"string\"\n        }\n      ]\n    },\n    \"tracking\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9a5ba43-8937-4cfd-b241-42bd0a1bc259",
+              "name": "Authentication failed - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "retrack",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4001,\n  \"message\": \"Invalid API key.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1daaf05-8605-4ed5-b589-8752242f0fec",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "retrack",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4004,\n  \"message\": \"Not found.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bedda95-6d9c-4647-a8df-8862eb178f2e",
+              "name": "Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trackings",
+                    "retrack",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique tracking identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Tracking-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4029,\n  \"message\": \"Too many requests.\",\n  \"data\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trackingmore.com/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Tracking-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "79d3aca8-f9c5-4125-99b3-2a9dd20eb6fb",
+    "name": "TrackingMore Air Waybills Trackings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "TrackingMore provides a unified multi-carrier shipment tracking REST API supporting 1,300+ carriers globally. The API enables real-time parcel tracking, webhook notifications for shipment status changes, automated carrier detection, delivery analytics, and branded tracking page customization. Designed for D2C merchants, logistics platforms, and ecommerce integrations across Shopify, Amazon, eBay, WooCommerce, and Magento.",
+      "type": "text/plain"
+    }
+  }
+}
