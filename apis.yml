@@ -130,6 +130,13 @@ tags:
   - Shipping
   - Tracking
   - Parcels
+  - Webhook
+  - E-Commerce
+tags_raw:
+  - Logistics
+  - Shipping
+  - Tracking
+  - Parcels
   - Webhooks
   - Ecommerce
 kind: contract
