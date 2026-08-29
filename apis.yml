@@ -191,6 +191,9 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: CapabilityMap
+    url: capabilities/trackingmore-capability-edges.yml
+    name: TrackingMore Business Capability Map
   - type: AgenticAccess
     url: agentic-access/trackingmore-agentic-access.yml
   - type: DomainSecurity
