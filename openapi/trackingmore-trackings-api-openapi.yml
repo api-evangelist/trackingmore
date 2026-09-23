@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: TrackingMore Air Waybills Trackings API
+  title: TrackingMore Trackings API
   description: TrackingMore provides a unified multi-carrier shipment tracking REST API supporting 1,300+ carriers globally. The API enables real-time parcel tracking, webhook notifications for shipment status changes, automated carrier detection, delivery analytics, and branded tracking page customization. Designed for D2C merchants, logistics platforms, and ecommerce integrations across Shopify, Amazon, eBay, WooCommerce, and Magento.
   version: v4
   contact:
@@ -261,29 +261,72 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimitExceeded'
 components:
+  responses:
+    BadRequest:
+      description: Bad request - missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4000
+            message: Bad Request
+            data: []
+    Unauthorized:
+      description: Authentication failed - invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4001
+            message: Invalid API key.
+            data: []
+    RateLimitExceeded:
+      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4029
+            message: Too many requests.
+            data: []
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4004
+            message: Not found.
+            data: []
   schemas:
-    UpdateTrackingRequest:
+    ApiResponse:
       type: object
       properties:
-        title:
+        code:
+          type: integer
+          description: Response code (200 = success)
+        message:
           type: string
-          description: Updated title/label for the tracking
-        customer_name:
+          description: Human-readable response message
+        data:
+          description: Response payload (varies by endpoint)
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        message:
           type: string
-          description: Updated customer name
-        customer_email:
-          type: string
-          format: email
-          description: Updated customer email
-        order_id:
-          type: string
-          description: Updated internal order ID
-        note:
-          type: string
-          description: Updated note or comment
-        language:
-          type: string
-          description: Updated language code for translated messages
+          description: Human-readable error message
+        data:
+          type: array
+          items: {}
+          description: Empty array for error responses
     Tracking:
       type: object
       properties:
@@ -367,45 +410,6 @@ components:
         tracking:
           type: object
           description: Combined tracking events object
-    TrackingListResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiResponse'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              total:
-                type: integer
-                description: Total number of trackings matching the query
-              trackings:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Tracking'
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-        data:
-          type: array
-          items: {}
-          description: Empty array for error responses
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Response code (200 = success)
-        message:
-          type: string
-          description: Human-readable response message
-        data:
-          description: Response payload (varies by endpoint)
     BatchTrackingResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
@@ -429,6 +433,54 @@ components:
                       type: string
                     error:
                       type: string
+    TrackingEvent:
+      type: object
+      properties:
+        checkpoint_date:
+          type: string
+          format: date-time
+          description: Date and time of this tracking checkpoint
+        location:
+          type: string
+          description: Location description for this checkpoint
+        checkpoint_status:
+          type: string
+          description: Status at this checkpoint
+        substatus:
+          type: string
+          description: Detailed sub-status at this checkpoint
+        details:
+          type: string
+          description: Human-readable description of the checkpoint event
+    TrackingResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/Tracking'
+    UpdateTrackingRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Updated title/label for the tracking
+        customer_name:
+          type: string
+          description: Updated customer name
+        customer_email:
+          type: string
+          format: email
+          description: Updated customer email
+        order_id:
+          type: string
+          description: Updated internal order ID
+        note:
+          type: string
+          description: Updated note or comment
+        language:
+          type: string
+          description: Updated language code for translated messages
     CreateTrackingRequest:
       type: object
       required:
@@ -472,73 +524,21 @@ components:
         origin_country:
           type: string
           description: ISO 3166-1 alpha-2 origin country code
-    TrackingEvent:
-      type: object
-      properties:
-        checkpoint_date:
-          type: string
-          format: date-time
-          description: Date and time of this tracking checkpoint
-        location:
-          type: string
-          description: Location description for this checkpoint
-        checkpoint_status:
-          type: string
-          description: Status at this checkpoint
-        substatus:
-          type: string
-          description: Detailed sub-status at this checkpoint
-        details:
-          type: string
-          description: Human-readable description of the checkpoint event
-    TrackingResponse:
+    TrackingListResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
       - type: object
         properties:
           data:
-            $ref: '#/components/schemas/Tracking'
-  responses:
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4004
-            message: Not found.
-            data: []
-    RateLimitExceeded:
-      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4029
-            message: Too many requests.
-            data: []
-    Unauthorized:
-      description: Authentication failed - invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4001
-            message: Invalid API key.
-            data: []
-    BadRequest:
-      description: Bad request - missing or invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4000
-            message: Bad Request
-            data: []
+            type: object
+            properties:
+              total:
+                type: integer
+                description: Total number of trackings matching the query
+              trackings:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tracking'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
