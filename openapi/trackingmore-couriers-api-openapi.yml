@@ -68,51 +68,7 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimitExceeded'
 components:
-  responses:
-    BadRequest:
-      description: Bad request - missing or invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4000
-            message: Bad Request
-            data: []
-    RateLimitExceeded:
-      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4029
-            message: Too many requests.
-            data: []
-    Unauthorized:
-      description: Authentication failed - invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4001
-            message: Invalid API key.
-            data: []
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-        data:
-          type: array
-          items: {}
-          description: Empty array for error responses
     Courier:
       type: object
       properties:
@@ -137,15 +93,19 @@ components:
         type:
           type: string
           description: Carrier type (e.g., express, postal, freight)
-    DetectCourierRequest:
+    ErrorResponse:
       type: object
-      required:
-      - tracking_number
       properties:
-        tracking_number:
+        code:
+          type: integer
+          description: Error code
+        message:
           type: string
-          description: The tracking number to detect the carrier for
-          example: '9400111899223397576146'
+          description: Human-readable error message
+        data:
+          type: array
+          items: {}
+          description: Empty array for error responses
     DetectCourierResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
@@ -175,6 +135,46 @@ components:
           description: Human-readable response message
         data:
           description: Response payload (varies by endpoint)
+    DetectCourierRequest:
+      type: object
+      required:
+      - tracking_number
+      properties:
+        tracking_number:
+          type: string
+          description: The tracking number to detect the carrier for
+          example: '9400111899223397576146'
+  responses:
+    Unauthorized:
+      description: Authentication failed - invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4001
+            message: Invalid API key.
+            data: []
+    RateLimitExceeded:
+      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4029
+            message: Too many requests.
+            data: []
+    BadRequest:
+      description: Bad request - missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4000
+            message: Bad Request
+            data: []
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
