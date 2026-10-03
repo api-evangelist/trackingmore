@@ -277,38 +277,17 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Tracking'
-    TrackingEvent:
-      type: object
-      properties:
-        checkpoint_date:
-          type: string
-          format: date-time
-          description: Date and time of this tracking checkpoint
-        location:
-          type: string
-          description: Location description for this checkpoint
-        checkpoint_status:
-          type: string
-          description: Status at this checkpoint
-        substatus:
-          type: string
-          description: Detailed sub-status at this checkpoint
-        details:
-          type: string
-          description: Human-readable description of the checkpoint event
-    ErrorResponse:
+    ApiResponse:
       type: object
       properties:
         code:
           type: integer
-          description: Error code
+          description: Response code (200 = success)
         message:
           type: string
-          description: Human-readable error message
+          description: Human-readable response message
         data:
-          type: array
-          items: {}
-          description: Empty array for error responses
+          description: Response payload (varies by endpoint)
     UpdateTrackingRequest:
       type: object
       properties:
@@ -331,6 +310,49 @@ components:
         language:
           type: string
           description: Updated language code for translated messages
+    CreateTrackingRequest:
+      type: object
+      required:
+      - tracking_number
+      - courier_code
+      properties:
+        tracking_number:
+          type: string
+          description: The shipment tracking number
+          example: '9400111899223397576146'
+        courier_code:
+          type: string
+          description: The carrier/courier code (e.g., usps, ups, fedex, dhl)
+          example: usps
+        title:
+          type: string
+          description: Custom title or label for this tracking
+        customer_name:
+          type: string
+          description: Name of the customer associated with this shipment
+        customer_email:
+          type: string
+          format: email
+          description: Customer email for notifications
+        order_id:
+          type: string
+          description: Your internal order ID
+        order_id_url:
+          type: string
+          format: uri
+          description: URL to your order management page for this order
+        note:
+          type: string
+          description: Free-form note or comment about this tracking
+        language:
+          type: string
+          description: Language code for translated tracking messages (e.g., en, zh-CN)
+        destination_country:
+          type: string
+          description: ISO 3166-1 alpha-2 destination country code
+        origin_country:
+          type: string
+          description: ISO 3166-1 alpha-2 origin country code
     Tracking:
       type: object
       properties:
@@ -414,49 +436,6 @@ components:
         tracking:
           type: object
           description: Combined tracking events object
-    CreateTrackingRequest:
-      type: object
-      required:
-      - tracking_number
-      - courier_code
-      properties:
-        tracking_number:
-          type: string
-          description: The shipment tracking number
-          example: '9400111899223397576146'
-        courier_code:
-          type: string
-          description: The carrier/courier code (e.g., usps, ups, fedex, dhl)
-          example: usps
-        title:
-          type: string
-          description: Custom title or label for this tracking
-        customer_name:
-          type: string
-          description: Name of the customer associated with this shipment
-        customer_email:
-          type: string
-          format: email
-          description: Customer email for notifications
-        order_id:
-          type: string
-          description: Your internal order ID
-        order_id_url:
-          type: string
-          format: uri
-          description: URL to your order management page for this order
-        note:
-          type: string
-          description: Free-form note or comment about this tracking
-        language:
-          type: string
-          description: Language code for translated tracking messages (e.g., en, zh-CN)
-        destination_country:
-          type: string
-          description: ISO 3166-1 alpha-2 destination country code
-        origin_country:
-          type: string
-          description: ISO 3166-1 alpha-2 origin country code
     BatchTrackingResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
@@ -480,17 +459,25 @@ components:
                       type: string
                     error:
                       type: string
-    ApiResponse:
+    TrackingEvent:
       type: object
       properties:
-        code:
-          type: integer
-          description: Response code (200 = success)
-        message:
+        checkpoint_date:
           type: string
-          description: Human-readable response message
-        data:
-          description: Response payload (varies by endpoint)
+          format: date-time
+          description: Date and time of this tracking checkpoint
+        location:
+          type: string
+          description: Location description for this checkpoint
+        checkpoint_status:
+          type: string
+          description: Status at this checkpoint
+        substatus:
+          type: string
+          description: Detailed sub-status at this checkpoint
+        details:
+          type: string
+          description: Human-readable description of the checkpoint event
     TrackingResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
@@ -498,6 +485,19 @@ components:
         properties:
           data:
             $ref: '#/components/schemas/Tracking'
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        data:
+          type: array
+          items: {}
+          description: Empty array for error responses
   responses:
     Unauthorized:
       description: Authentication failed - invalid or missing API key
@@ -509,15 +509,15 @@ components:
             code: 4001
             message: Invalid API key.
             data: []
-    BadRequest:
-      description: Bad request - missing or invalid parameters
+    RateLimitExceeded:
+      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
-            code: 4000
-            message: Bad Request
+            code: 4029
+            message: Too many requests.
             data: []
     NotFound:
       description: The requested resource was not found
@@ -529,15 +529,15 @@ components:
             code: 4004
             message: Not found.
             data: []
-    RateLimitExceeded:
-      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
+    BadRequest:
+      description: Bad request - missing or invalid parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
           example:
-            code: 4029
-            message: Too many requests.
+            code: 4000
+            message: Bad Request
             data: []
   securitySchemes:
     ApiKeyAuth:

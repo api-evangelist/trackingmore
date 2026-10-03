@@ -69,53 +69,7 @@ paths:
           $ref: '#/components/responses/RateLimitExceeded'
 components:
   schemas:
-    Courier:
-      type: object
-      properties:
-        courier_code:
-          type: string
-          description: Unique carrier code used in API requests
-          example: usps
-        courier_name:
-          type: string
-          description: Human-readable carrier name
-          example: USPS
-        courier_url:
-          type: string
-          format: uri
-          description: Carrier website URL
-        phone:
-          type: string
-          description: Carrier customer service phone number
-        country:
-          type: string
-          description: Country where this carrier primarily operates
-        type:
-          type: string
-          description: Carrier type (e.g., express, postal, freight)
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-        data:
-          type: array
-          items: {}
-          description: Empty array for error responses
     DetectCourierResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiResponse'
-      - type: object
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/Courier'
-    CourierListResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
       - type: object
@@ -144,6 +98,52 @@ components:
           type: string
           description: The tracking number to detect the carrier for
           example: '9400111899223397576146'
+    CourierListResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Courier'
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        data:
+          type: array
+          items: {}
+          description: Empty array for error responses
+    Courier:
+      type: object
+      properties:
+        courier_code:
+          type: string
+          description: Unique carrier code used in API requests
+          example: usps
+        courier_name:
+          type: string
+          description: Human-readable carrier name
+          example: USPS
+        courier_url:
+          type: string
+          format: uri
+          description: Carrier website URL
+        phone:
+          type: string
+          description: Carrier customer service phone number
+        country:
+          type: string
+          description: Country where this carrier primarily operates
+        type:
+          type: string
+          description: Carrier type (e.g., express, postal, freight)
   responses:
     Unauthorized:
       description: Authentication failed - invalid or missing API key
