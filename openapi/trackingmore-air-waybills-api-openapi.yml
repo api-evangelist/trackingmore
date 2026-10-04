@@ -50,35 +50,38 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimitExceeded'
 components:
+  responses:
+    RateLimitExceeded:
+      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4029
+            message: Too many requests.
+            data: []
+    Unauthorized:
+      description: Authentication failed - invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4001
+            message: Invalid API key.
+            data: []
+    BadRequest:
+      description: Bad request - missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4000
+            message: Bad Request
+            data: []
   schemas:
-    AirWaybillRequest:
-      type: object
-      required:
-      - awb_number
-      properties:
-        awb_number:
-          type: string
-          description: Master Air Waybill number in format XXX-XXXXXXXX or XXXXXXXXXXX
-          pattern: ^\d{3}[ -]?(\d{8})$
-          example: 020-12345678
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Response code (200 = success)
-        message:
-          type: string
-          description: Human-readable response message
-        data:
-          description: Response payload (varies by endpoint)
-    AirWaybillResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiResponse'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/AirWaybill'
     AirWaybill:
       type: object
       properties:
@@ -109,6 +112,34 @@ components:
                 type: string
               description:
                 type: string
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Response code (200 = success)
+        message:
+          type: string
+          description: Human-readable response message
+        data:
+          description: Response payload (varies by endpoint)
+    AirWaybillRequest:
+      type: object
+      required:
+      - awb_number
+      properties:
+        awb_number:
+          type: string
+          description: Master Air Waybill number in format XXX-XXXXXXXX or XXXXXXXXXXX
+          pattern: ^\d{3}[ -]?(\d{8})$
+          example: 020-12345678
+    AirWaybillResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/AirWaybill'
     ErrorResponse:
       type: object
       properties:
@@ -122,37 +153,6 @@ components:
           type: array
           items: {}
           description: Empty array for error responses
-  responses:
-    Unauthorized:
-      description: Authentication failed - invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4001
-            message: Invalid API key.
-            data: []
-    RateLimitExceeded:
-      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4029
-            message: Too many requests.
-            data: []
-    BadRequest:
-      description: Bad request - missing or invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4000
-            message: Bad Request
-            data: []
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

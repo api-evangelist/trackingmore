@@ -261,6 +261,47 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimitExceeded'
 components:
+  responses:
+    RateLimitExceeded:
+      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4029
+            message: Too many requests.
+            data: []
+    Unauthorized:
+      description: Authentication failed - invalid or missing API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4001
+            message: Invalid API key.
+            data: []
+    BadRequest:
+      description: Bad request - missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4000
+            message: Bad Request
+            data: []
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            code: 4004
+            message: Not found.
+            data: []
   schemas:
     TrackingListResponse:
       allOf:
@@ -277,39 +318,32 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/Tracking'
-    ApiResponse:
+    TrackingEvent:
       type: object
       properties:
-        code:
-          type: integer
-          description: Response code (200 = success)
-        message:
+        checkpoint_date:
           type: string
-          description: Human-readable response message
-        data:
-          description: Response payload (varies by endpoint)
-    UpdateTrackingRequest:
-      type: object
-      properties:
-        title:
+          format: date-time
+          description: Date and time of this tracking checkpoint
+        location:
           type: string
-          description: Updated title/label for the tracking
-        customer_name:
+          description: Location description for this checkpoint
+        checkpoint_status:
           type: string
-          description: Updated customer name
-        customer_email:
+          description: Status at this checkpoint
+        substatus:
           type: string
-          format: email
-          description: Updated customer email
-        order_id:
+          description: Detailed sub-status at this checkpoint
+        details:
           type: string
-          description: Updated internal order ID
-        note:
-          type: string
-          description: Updated note or comment
-        language:
-          type: string
-          description: Updated language code for translated messages
+          description: Human-readable description of the checkpoint event
+    TrackingResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/Tracking'
     CreateTrackingRequest:
       type: object
       required:
@@ -353,6 +387,62 @@ components:
         origin_country:
           type: string
           description: ISO 3166-1 alpha-2 origin country code
+    BatchTrackingResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              accepted:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tracking'
+              rejected:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tracking_number:
+                      type: string
+                    courier_code:
+                      type: string
+                    error:
+                      type: string
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Response code (200 = success)
+        message:
+          type: string
+          description: Human-readable response message
+        data:
+          description: Response payload (varies by endpoint)
+    UpdateTrackingRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Updated title/label for the tracking
+        customer_name:
+          type: string
+          description: Updated customer name
+        customer_email:
+          type: string
+          format: email
+          description: Updated customer email
+        order_id:
+          type: string
+          description: Updated internal order ID
+        note:
+          type: string
+          description: Updated note or comment
+        language:
+          type: string
+          description: Updated language code for translated messages
     Tracking:
       type: object
       properties:
@@ -436,55 +526,6 @@ components:
         tracking:
           type: object
           description: Combined tracking events object
-    BatchTrackingResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiResponse'
-      - type: object
-        properties:
-          data:
-            type: object
-            properties:
-              accepted:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Tracking'
-              rejected:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    tracking_number:
-                      type: string
-                    courier_code:
-                      type: string
-                    error:
-                      type: string
-    TrackingEvent:
-      type: object
-      properties:
-        checkpoint_date:
-          type: string
-          format: date-time
-          description: Date and time of this tracking checkpoint
-        location:
-          type: string
-          description: Location description for this checkpoint
-        checkpoint_status:
-          type: string
-          description: Status at this checkpoint
-        substatus:
-          type: string
-          description: Detailed sub-status at this checkpoint
-        details:
-          type: string
-          description: Human-readable description of the checkpoint event
-    TrackingResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiResponse'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/Tracking'
     ErrorResponse:
       type: object
       properties:
@@ -498,47 +539,6 @@ components:
           type: array
           items: {}
           description: Empty array for error responses
-  responses:
-    Unauthorized:
-      description: Authentication failed - invalid or missing API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4001
-            message: Invalid API key.
-            data: []
-    RateLimitExceeded:
-      description: Rate limit exceeded. Wait 120 seconds before retrying. Pro plan limit is 10 req/s (3 req/s for create tracking).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4029
-            message: Too many requests.
-            data: []
-    NotFound:
-      description: The requested resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4004
-            message: Not found.
-            data: []
-    BadRequest:
-      description: Bad request - missing or invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            code: 4000
-            message: Bad Request
-            data: []
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
