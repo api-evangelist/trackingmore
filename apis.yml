@@ -192,6 +192,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: Plans
+    url: plans/trackingmore-plans.yml
+  - type: FinOps
+    url: finops/trackingmore-finops.yml
   - type: CapabilityMap
     url: capabilities/trackingmore-capability-edges.yml
     name: TrackingMore Business Capability Map
