@@ -6,14 +6,32 @@ source:
 - https://composio.dev/toolkits/trackingmore
 - https://monid.ai/tools/trackingmore
 checked:
+- gorgias/integrations/gorgias-integration-edges.yml
 - https://composio.dev/toolkits/trackingmore
 - https://monid.ai/tools/trackingmore
 - https://n8n.io/integrations/trackingmore/
 - https://zapier.com/apps/trackingmore/integrations
 - wordpress/integrations/wordpress-integration-edges.yml
+- zendesk/integrations/zendesk-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
+- partner_name: Gorgias (own)
+  partner: gorgias
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.gorgias.com/apps/trackingmore
+  mirror_of: gorgias/integrations/gorgias-integration-edges.yml
+  apps:
+  - TrackingMore
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
 - partner_name: WordPress (own)
   partner: wordpress
   partner_match: mirror
@@ -31,4 +49,21 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: WordPress plugin
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/488632/trackingmore/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - TrackingMore
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: eComm and Payments
 templates: []
